@@ -1,0 +1,38 @@
+.header{
+    position: fixed;
+    top: 0;
+    background-color: whitesmoke;
+    height: 70px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+    margin-bottom: 50px;
+    z-index: 999;
+    font-family: 'newspaper', 'Times New Roman', Times, serif;
+
+    &-logo{
+        height: 40px;
+        margin-left: 20px;
+        filter: grayscale(100%),;
+    
+    }
+
+    &-welcome{
+        width: 47vw;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 16px;
+        text-align: center;
+    }
+    &-capital{
+        font-family: 'newspaper', 'Times New Roman', Times, serif;
+        font-size: xx-large;
+        color: #9A998C;
+        vertical-align: sub;
+    }
+}
