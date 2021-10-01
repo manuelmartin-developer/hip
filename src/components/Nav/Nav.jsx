@@ -1,12 +1,15 @@
-import React from "react";
+import React, { Component } from "react";
 import Menu from '../Menu'
 
-const Nav = () => {
-  return (
-    <nav>
-      <Menu />
-    </nav>
-  )
-};
+
+class Nav extends Component {
+  render() {
+    return (
+      <nav>
+        <Menu />
+      </nav>
+      )
+  }
+}
 
 export default Nav;

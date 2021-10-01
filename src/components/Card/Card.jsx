@@ -1,7 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 
-const Card = () => {
-  return <div>Card</div>;
-};
+class Card extends Component {
+  render() {
+    return <div>Card</div>;
+  }
+}
 
 export default Card;

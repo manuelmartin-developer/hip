@@ -1,36 +1,52 @@
-
-import { useState } from "react";
+import React, { Component } from 'react'
 import './App.css';
 import './styles/styles.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-import Header from './components/Header';
-import Main from './components/Main';
-import Footer from './components/Footer';
-
+import Header from './components/Header'
+import Main from './components/Main'
+import Footer from './components/Footer'
 import { BrowserRouter } from 'react-router-dom';
-import { nameContext } from './contexts/nameContext'
+import { nameContext } from './contexts/nameContext';
 
-function App() {
 
-  const [name, setName] = useState("");
 
-  const user = {
-    name: name,
-    setName: setName
+export class App extends Component {
+
+  constructor(props){
+    super(props)
+
+    this.state = {
+        user:{
+          name: ''
+        }
+    }
+
   }
 
-  return (
-    <div className="App">
-      <nameContext.Provider value={user}>
-        <BrowserRouter>
-        <Header />
+  newName = (name) => {
+    this.setState({
+      user:{name : name}
+    })
+  }
+
+  render() {
+
+    const data = {
+      name: this.state.user.name,
+      newName: this.newName
+    }
+    return (
+      <div className="App">
+      <BrowserRouter>
+        <nameContext.Provider value={data}>
+          <Header />
           <Main />
-        <Footer />
-        </BrowserRouter>
-      </nameContext.Provider>
+          <Footer />
+        </nameContext.Provider>
+      </BrowserRouter>
     </div>
-  );
+    )
+  }
 }
 
 export default App;

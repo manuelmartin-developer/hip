@@ -1,44 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
-import axios from "axios";
+import React, { Component } from "react";
+import { Route, Switch } from 'react-router-dom';
+import Home from '../Home';
+import Form from '../Form';
+import News from '../News';
+import Error from '../Error';
 
-const ListNews = () => {
-  const [isLoading, setLoading] = useState(false);
-  const [news, setNews] = useState([]);
+class Main extends Component {
+  render() {
+    return (
+      <main className="Main">
+        <Switch>
+          <Route path='/' component={Home} exact />
+          <Route path='/form' component={Form} />
+          <Route path='/list' component={News} />
+          <Route component={Error} />
+        </Switch>
+      </main>
+     
+    )
+  }
+}
 
-  useEffect(() => {
-    if (isLoading) {
-      (async () => {
-        try {
-          const resp = await axios.get(
-            "https://api.nytimes.com/svc/mostpopular/v2/emailed/7.json?api-key=tJTlgHe561KfAsr8b86nOD9IQ1Lg8ajc"
-          );
-          const results = resp.data.results.filter(
-            (current, index) => index < 5
-          );
-          console.log(results);
-          setNews(results);
-          setLoading(false);
-        } catch (error) {
-          console.log(error);
-        }
-      })();
-    }
-  }, [isLoading]);
-
-  const handleClick = () => setLoading(true);
-
-  return (
-    <div className="test">
-      <Button
-        variant="secondary"
-        disabled={isLoading}
-        onClick={!isLoading ? handleClick : null}
-      >
-        {isLoading ? "Loading…" : "Click to load"}
-      </Button>
-    </div>
-  );
-};
-
-export default ListNews;
+export default Main;

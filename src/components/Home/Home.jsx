@@ -1,35 +1,42 @@
-import React, { useRef, useContext } from "react";
-import { Button, Form } from "react-bootstrap";
-import { nameContext } from "../../contexts/nameContext";
+import React, { Component } from "react";
+import { nameContext } from '../../contexts/nameContext';
+import { Button, Form } from 'react-bootstrap';
 
-const Home = () => {
-  
-  const { setName } = useContext(nameContext);
 
-  const input = useRef(null);
+class Home extends Component {
+  constructor(props) {
+    super(props)
 
-  const handleSubmit = (event) => {
+    this.name = React.createRef();
+  }
+
+  handleSubmit = (event) => {
     event.preventDefault();
+  }
 
-  };
 
-  const handleName = () => {
-    setName(input.current.value)
-  };
 
-  return (
-    <section className="home"> 
-        <Form className="home-form" onSubmit={handleSubmit} autoComplete="off">
+  render() {
+    return (
+
+      <section className="home">
+        <Form onSubmit={this.handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Control type="text" ref={input} />
-            <Form.Text className="text-muted home-form">Please input your name</Form.Text>
+            <Form.Control type="text" ref={this.name} />
+            <Form.Text className="text-muted">
+              Please input your name
+            </Form.Text>
           </Form.Group>
-            <Button variant="secondary" onClick={handleName} >
-              Submit
-            </Button>
+          <nameContext.Consumer>
+            {({ newName }) =>
+              <Button variant="secondary" onClick={() => { newName(this.name.current.value) }} >
+                Submit
+              </Button>}
+          </nameContext.Consumer>
         </Form>
-    </section>
-  );
-};
+      </section>
+    )
+  }
+}
 
 export default Home;
