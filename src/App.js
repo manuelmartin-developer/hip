@@ -9,18 +9,14 @@ import { BrowserRouter } from 'react-router-dom';
 import { nameContext } from './contexts/nameContext';
 
 
-
 export class App extends Component {
 
   constructor(props){
     super(props)
 
     this.state = {
-        user:{
-          name: ''
-        }
+        user:{name: ''}
     }
-
   }
 
   newName = (name) => {
@@ -28,17 +24,18 @@ export class App extends Component {
       user:{name : name}
     })
   }
-
+ 
   render() {
 
-    const data = {
+    const user = {
       name: this.state.user.name,
       newName: this.newName
     }
+
     return (
       <div className="App">
       <BrowserRouter>
-        <nameContext.Provider value={data}>
+        <nameContext.Provider value={user}>
           <Header />
           <Main />
           <Footer />

@@ -16,17 +16,22 @@ export class Main extends Component {
   }
 
   addReport = (newReport) => {
-    this.setState({news: [...this.state.news, newReport]});
-  }
+    this.setState({ news: [...this.state.news, newReport] });
+  };
 
   render() {
-
     return (
       <main className="main">
         <Switch>
           <Route path="/" component={Home} exact />
-          <Route path="/form" component={() => <FormNews addReport={this.addReport} />} />
-          <Route path="/list" component={() => <News report={this.state.news} />} />
+          <Route
+            path="/form"
+            component={() => <FormNews addReport={this.addReport} />}
+          />
+          <Route
+            path="/list"
+            component={() => <News report={this.state.news} />}
+          />
           <Route component={Error} />
         </Switch>
       </main>

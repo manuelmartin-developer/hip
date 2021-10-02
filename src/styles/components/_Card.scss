@@ -1,0 +1,84 @@
+.card {
+  font-family: "newspaper", "Times New Roman", Times, serif;
+  margin: 40px auto;
+  width: 300px;
+  height: 350px;
+  padding: 5px;
+
+  background: #fff;
+  border-radius: 2px;
+
+  &-title {
+    font-size: 1.4rem;
+    text-align: left;
+    height: 30%;
+    & > a {
+      text-decoration: none;
+      color: #9a998c;
+    }
+
+    & > a:visited {
+      color: #9a998c;
+    }
+  }
+
+  &-report {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: justify;
+    height: 70%;
+
+    &-plot {
+      font-size: 0.8rem;
+      width: 50%;
+      margin: 0 5px;
+    }
+
+    &-img {
+      width: 50%;
+      height: 100%;
+      margin: 0 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      & > img {
+        width: 150px;
+      }
+    }
+  }
+}
+.card::before,
+.card::after {
+  content: "";
+  position: absolute;
+  bottom: 10px;
+  width: 40%;
+  height: 10px;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.7);
+  z-index: -1;
+  transition: all 0.3s ease-in-out;
+}
+.card::before {
+  left: 15px;
+  transform: skew(-5deg) rotate(-5deg);
+}
+
+.card::after {
+  right: 15px;
+  transform: skew(5deg) rotate(5deg);
+}
+
+.card:hover::before,
+.box:hover::after {
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
+}
+
+.card:hover::before {
+  left: 5px;
+}
+
+.card:hover::after {
+  right: 5px;
+}

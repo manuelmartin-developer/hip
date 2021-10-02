@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import Menu from '../Menu'
-
+import Menu from "../Menu";
 
 class Nav extends Component {
   render() {
@@ -8,7 +7,7 @@ class Nav extends Component {
       <nav>
         <Menu />
       </nav>
-      )
+    );
   }
 }
 

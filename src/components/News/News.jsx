@@ -12,7 +12,6 @@ class News extends Component {
     };
   }
 
-
   getNews = async () => {
     const resp = await axios.get(
       "https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=tJTlgHe561KfAsr8b86nOD9IQ1Lg8ajc"
@@ -22,17 +21,17 @@ class News extends Component {
     );
 
     this.setState({
-      news: result
+      news: [...result, ...this.props.report],
     });
   };
-  componentDidMount(){
-
-    this.getNews()
+  componentDidMount() {
+    this.getNews();
   }
 
   render() {
     const news = this.state.news;
     const report = this.props.report;
+    console.log("report", report);
     console.log(news);
     if (news.length === 0) {
       return (
