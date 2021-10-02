@@ -1,39 +1,52 @@
 import React, { Component } from "react";
-import httClient from '../../axios_client';
-import ListNews from '../ListNews'
-import Card from '../Card'
-import { Button, Form } from 'react-bootstrap';
-
+import axios from "axios";
+import ListNews from "../ListNews";
+import { Spinner } from "react-bootstrap";
 
 class News extends Component {
-
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
 
     this.state = {
-      news:[]
-    }
+      news: [],
+    };
   }
 
-  getNews = () => {
-    httClient.get('https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=tJTlgHe561KfAsr8b86nOD9IQ1Lg8ajc')
-    .then((response) => {
-      console.log(response)
-      // this.setState({
-      //   news: [...response.data]
-      // })
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-  }
 
+  getNews = async () => {
+    const resp = await axios.get(
+      "https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=tJTlgHe561KfAsr8b86nOD9IQ1Lg8ajc"
+    );
+    const result = await resp.data.results.filter(
+      (current, index) => index < 5
+    );
+
+    this.setState({
+      news: result
+    });
+  };
+  componentDidMount(){
+
+    this.getNews()
+  }
 
   render() {
-
-    return <div className="Home">
-      <button onClick={this.getNews}>Busca</button>
-    </div>;
+    const news = this.state.news;
+    const report = this.props.report;
+    console.log(news);
+    if (news.length === 0) {
+      return (
+        <section className="news-spinner">
+          <Spinner animation="grow" variant="secondary" />
+        </section>
+      );
+    } else {
+      return (
+        <section className="news">
+          <ListNews info={news} />
+        </section>
+      );
+    }
   }
 }
 

@@ -20,7 +20,7 @@ class Home extends Component {
     return (
 
       <section className="home">
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit} autoComplete="off">
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control type="text" ref={this.name} />
             <Form.Text className="text-muted">

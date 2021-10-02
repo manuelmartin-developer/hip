@@ -1,22 +1,37 @@
-import React from "react";
-import { Route, Switch } from 'react-router-dom';
+import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
 
-import Home from '../Home';
-import Form from '../Form';
-import News from '../News';
-import Error from '../Error';
+import Home from "../Home";
+import FormNews from "../FormNews";
+import News from "../News";
+import Error from "../Error";
 
-const Main = () => {
-  return (
-    <main className="main">
-      <Switch>
-          <Route path='/' component={Home} exact />
-          <Route path='/form' component={Form} />
-          <Route path='/list' component={News} />
+export class Main extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      news: [],
+    };
+  }
+
+  addReport = (newReport) => {
+    this.setState({news: [...this.state.news, newReport]});
+  }
+
+  render() {
+
+    return (
+      <main className="main">
+        <Switch>
+          <Route path="/" component={Home} exact />
+          <Route path="/form" component={() => <FormNews addReport={this.addReport} />} />
+          <Route path="/list" component={() => <News report={this.state.news} />} />
           <Route component={Error} />
         </Switch>
-    </main>
-    )
-};
+      </main>
+    );
+  }
+}
 
 export default Main;

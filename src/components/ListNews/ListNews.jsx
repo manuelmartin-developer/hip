@@ -1,24 +1,40 @@
 import React, { Component } from "react";
-import { Route, Switch } from 'react-router-dom';
-import Home from '../Home';
-import Form from '../Form';
-import News from '../News';
-import Error from '../Error';
+import Card from "../Card";
 
-class Main extends Component {
+class ListNews extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      news: [],
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      news: this.props.info,
+    });
+  }
+
+  paintNews = () => {
+    return this.state.news.map((report, index) => (
+      <Card
+        info={report}
+        key={index}
+        remove={() => this.removeOneReport(index)}
+      />
+    ));
+  };
+
+  removeOneReport = (index) => {
+    const remainNews = this.state.news.filter(
+      (current, currentIndex) => currentIndex !== index
+    );
+    this.setState({ news: remainNews });
+  };
   render() {
-    return (
-      <main className="Main">
-        <Switch>
-          <Route path='/' component={Home} exact />
-          <Route path='/form' component={Form} />
-          <Route path='/list' component={News} />
-          <Route component={Error} />
-        </Switch>
-      </main>
-     
-    )
+    return <>{this.paintNews()}</>;
   }
 }
 
-export default Main;
+export default ListNews;
