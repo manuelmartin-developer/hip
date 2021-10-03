@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import ListNews from "../ListNews";
 import { Spinner } from "react-bootstrap";
+require('dotenv').config();
 
 class News extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class News extends Component {
 
   getNews = async () => {
     const resp = await axios.get(
-      "https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=tJTlgHe561KfAsr8b86nOD9IQ1Lg8ajc"
+      `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${process.env.REACT_APP_API_KEY}`
     );
     const result = await resp.data.results.filter(
       (current, index) => index < 5
